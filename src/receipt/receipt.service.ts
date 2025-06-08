@@ -182,10 +182,10 @@ export class ReceiptService {
           },
         },
       );
-      console.log(res.data)
+      const data: any = res.data;
       const barimt = await this.save(
         {
-          ...res.data,
+          ...data,
           pos: res.data.posId,
           paidAmount: dto.paidAmount,
           totalAmount: body.totalAmount,
@@ -197,7 +197,7 @@ export class ReceiptService {
       console.log(barimt);
       if (barimt) return { ...barimt };
       if (res.status != 200) throw new HttpException('', 500);
-      const data: BarimtResponseDto = res.data;
+      
       const qrdata = await this.generateQrImage(data.qrData);
 
       return {
