@@ -182,6 +182,7 @@ export class ReceiptService {
           },
         },
       );
+      console.log(res.data)
       const barimt = await this.save(
         {
           ...res.data,
