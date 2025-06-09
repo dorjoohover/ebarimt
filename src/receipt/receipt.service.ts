@@ -40,7 +40,7 @@ export class ReceiptService {
       branchNo: dto.branchNo,
       districtCode: user.district,
       merchantTin: user.tin,
-      posNo: '10008555',
+      posNo: '10009446',
       // ?
       // consumerNo: '10038071',
       type: RECEIPT[dto.type],
