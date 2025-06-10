@@ -187,6 +187,7 @@ export class ReceiptService {
         {
           ...data,
           pos: res.data.posId,
+          tin: res.data.merchantTin,
           paidAmount: dto.paidAmount,
           totalAmount: body.totalAmount,
         },
@@ -262,6 +263,7 @@ export class ReceiptService {
         noat: dto.totalVAT,
         tax: dto.totalCityTax,
         key: key,
+        tin: dto.tin,
         user: new Types.ObjectId(id),
       };
 

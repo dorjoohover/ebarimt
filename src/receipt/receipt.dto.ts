@@ -14,6 +14,8 @@ export class ReceiptDto {
   paidAmount: number;
   @ApiProperty({ type: String })
   pos: string;
+  @ApiProperty({ type: String })
+  tin: string;
 
   @ApiProperty({ type: Number })
   totalVAT: number;

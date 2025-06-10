@@ -20,6 +20,8 @@ export class Receipt {
   key: string;
   @Prop({ type: String })
   pos: string;
+  @Prop({ type: String })
+  tin: string;
   // @Prop({ type: String })
   // qrData: string;
   @Prop({ type: String })
