@@ -195,13 +195,13 @@ export class ReceiptService {
         user._id,
       );
       console.log(barimt);
-      if (barimt) return { ...barimt };
+
       if (res.status != 200) throw new HttpException('', 500);
-      
+
       const qrdata = await this.generateQrImage(data.qrData);
 
       return {
-        ...data,
+        ...barimt,
         qrData: qrdata,
       };
     } catch (error) {
@@ -264,7 +264,7 @@ export class ReceiptService {
         key: key,
         user: new Types.ObjectId(id),
       };
-      console.log(body);
+
       const barimt = await this.model.create(body);
       await this.userModel
         .findOneAndUpdate(
@@ -276,6 +276,7 @@ export class ReceiptService {
           },
         )
         .exec();
+      return body;
     } catch (error) {
       throw error;
     }
@@ -306,9 +307,9 @@ export class ReceiptService {
         //   HttpStatus.NOT_FOUND,
         // );
       }
-      console.log(barimt)
+      console.log(barimt);
       const { user } = barimt;
-      
+
       return {
         tin: user.tin,
         lottery: barimt.lottery,
