@@ -119,12 +119,14 @@ export class ReceiptService {
                   totalCityTax: tax,
                   totalAmount: totalAmount,
                   unitPrice: unitPrice,
+                  qty: qty,
                   // taxProductCode: taxProductCode,
                 };
               return {
                 ...body,
                 totalVAT: vat * qty,
                 totalCityTax: tax,
+                qty: qty,
                 totalAmount: totalAmount,
                 unitPrice: unitPrice,
               };
@@ -192,6 +194,8 @@ export class ReceiptService {
           paidAmount: dto.paidAmount,
           totalAmount: body.totalAmount,
           qrdata: qrdata,
+          name: body.receipts[0].items[0].name,
+          qty: body.receipts[0].items[0].qty,
         },
         user.token,
         dto.billIdSuffix,
@@ -267,6 +271,8 @@ export class ReceiptService {
         key: key,
         tin: dto.tin,
         user: new Types.ObjectId(id),
+        name: dto.name,
+        qty: dto.qty,
       };
 
       const barimt = await this.model.create(body);
@@ -325,12 +331,14 @@ export class ReceiptService {
         date: barimt.date,
         totalVAT: barimt.totalVAT,
         key: barimt.key,
-        name: user.name,
+        user: user.name,
         tax: barimt.tax,
         pos: barimt.pos,
         status: barimt.status,
         easy: barimt.easy,
         qrdata: barimt.qrdata,
+        name: barimt.name,
+        qty: barimt.qty,
       };
     } catch (error) {
       console.log(error);
@@ -372,7 +380,6 @@ export class ReceiptService {
         key: dto.id.toString(),
         user: user,
       });
-      console.log(b);
     } catch (error) {
       throw new HttpException('Баримт олдсонгүй.', 500);
     }

@@ -38,6 +38,10 @@ export class Receipt {
   easy: boolean;
   @Prop({ type: String })
   qrdata: string;
+  @Prop({ type: String })
+  name: string;
+  @Prop({ type: Number })
+  qty: number;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User | any;
 

@@ -38,6 +38,10 @@ export class ReceiptDto {
   easy: boolean;
   @ApiProperty({ type: String })
   id: string;
+  @ApiProperty({ type: String })
+  name: string;
+  @ApiProperty({ type: Number })
+  qty: number;
 }
 
 export class ReceiptItemsDto {
