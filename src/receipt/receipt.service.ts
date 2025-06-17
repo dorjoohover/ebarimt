@@ -350,13 +350,16 @@ export class ReceiptService {
     // Баримт хэвлэсэн огноо "yyyy-MM-dd HH:mm:ss" форматтай огноо
     const date = format(new Date(dto.date), 'yyyy-MM-dd HH:mm:ss');
     try {
+      const barimt = await this.model.findOne({
+        key: dto.id
+      })
       const response = await axios.delete(`${LOCAL}rest/receipt`, {
         data: {
-          id: dto.id,
+          id: barimt.ddtd,
           date,
         },
       });
-      // console.log(response.data);
+      console.log(response.data);
     } catch (error) {
       console.log(error.message);
       throw new HttpException('Алдаа гарлаа', 500);
