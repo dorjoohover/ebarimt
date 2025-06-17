@@ -358,13 +358,13 @@ export class ReceiptService {
         // user: 
       });
       const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
-      const response = await axios.delete(`${LOCAL}rest/receipt`, {
-        data: {
-          id: barimt.ddtd,
-          date,
-        },
-      });
-      console.log(response.data);
+      // const response = await axios.delete(`${LOCAL}rest/receipt`, {
+      //   data: {
+      //     id: barimt.ddtd,
+      //     date,
+      //   },
+      // });
+      // console.log(response.data);
       // this.model.deleteMany({
       //   key: dto.id,
       // });
