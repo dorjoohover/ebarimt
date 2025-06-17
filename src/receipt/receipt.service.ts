@@ -270,6 +270,7 @@ export class ReceiptService {
       };
 
       const barimt = await this.model.create(body);
+      console.log(barimt, token)
       await this.userModel
         .findOneAndUpdate(
           {
