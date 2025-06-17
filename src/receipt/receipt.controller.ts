@@ -65,7 +65,6 @@ export class ReceiptController {
   // delete
   @Delete()
   async delete(@Body() dto: DeleteReceiptDto, @Request() {user}) {
-    console.log(user)
-    return await this.service.deleteReceipt(dto);
+    return await this.service.deleteReceipt(dto, user._id.toString());
   }
 }

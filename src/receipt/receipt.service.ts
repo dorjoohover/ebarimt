@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model, Types } from 'mongoose';
+import mongoose, { Model, Types } from 'mongoose';
 import { Receipt, ReceiptDocument } from 'src/schema/receipt.schema';
 import {
   BarimtDto,
@@ -350,13 +350,14 @@ export class ReceiptService {
     }
   }
 
-  async deleteReceipt(dto: DeleteReceiptDto) {
+  async deleteReceipt(dto: DeleteReceiptDto, user: string) {
     // Баримт хэвлэсэн огноо "yyyy-MM-dd HH:mm:ss" форматтай огноо
     try {
       const barimt = await this.model.findOne({
         key: dto.id,
-        // user: 
+        user: new mongoose.Types.ObjectId(user)
       });
+      console.log(barimt)
       const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
       // const response = await axios.delete(`${LOCAL}rest/receipt`, {
       //   data: {
