@@ -22,7 +22,6 @@ export class AuthService {
     if (!token && !user) {
       throw new HttpException('Хандах эрхгүй байна.', HttpStatus.BAD_REQUEST);
     }
-    console.log(token)
     user = await this.model.findOne({ token });
     if (!user)
       throw new HttpException(

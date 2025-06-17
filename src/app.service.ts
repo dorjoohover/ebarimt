@@ -56,7 +56,6 @@ export class AppService {
   async restReceipt(dto: any, token: string) {
     try {
       return `${dto}${Date.now()}`;
-      console.log(dto);
       if (!dto.receipts || dto.receipts.length == 0)
         throw new HttpException('Мэдээлэл дутуу', HttpStatus.BAD_REQUEST);
       const receipts = await Promise.all(
