@@ -183,6 +183,7 @@ export class ReceiptService {
         },
       );
       const data: any = res.data;
+      const qrdata = await this.generateQrImage(data.qrData);
       const barimt = await this.save(
         {
           ...data,
@@ -190,6 +191,7 @@ export class ReceiptService {
           tin: res.data.merchantTin,
           paidAmount: dto.paidAmount,
           totalAmount: body.totalAmount,
+          qrdata: qrdata,
         },
         user.token,
         dto.billIdSuffix,
@@ -198,8 +200,6 @@ export class ReceiptService {
       console.log(barimt);
 
       if (res.status != 200) throw new HttpException('', 500);
-
-      const qrdata = await this.generateQrImage(data.qrData);
 
       return {
         ...barimt,
@@ -247,13 +247,15 @@ export class ReceiptService {
           date: res.date,
           easy: res.easy,
           tin: res.tin,
+          qrdata: res.qrdata
         };
       }
       const body: Receipt = {
         date: dto.date,
         easy: dto.easy,
         lottery: dto.lottery,
-        //   qrdto: dto.qrdto,
+
+        qrdata: dto.qrdata,
         pos: dto.pos,
         status: dto.status,
         totalAmount: dto.totalAmount,
@@ -327,6 +329,7 @@ export class ReceiptService {
         pos: barimt.pos,
         status: barimt.status,
         easy: barimt.easy,
+        qrdata: barimt.qrdata
       };
     } catch (error) {
       console.log(error);
@@ -351,8 +354,8 @@ export class ReceiptService {
     const date = format(new Date(dto.date), 'yyyy-MM-dd HH:mm:ss');
     try {
       const barimt = await this.model.findOne({
-        key: dto.id
-      })
+        key: dto.id,
+      });
       const response = await axios.delete(`${LOCAL}rest/receipt`, {
         data: {
           id: barimt.ddtd,

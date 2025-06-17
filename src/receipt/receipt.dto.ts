@@ -24,6 +24,8 @@ export class ReceiptDto {
 
   @ApiProperty({ type: String })
   lottery: string;
+  @ApiProperty({ type: String })
+  qrdata: string;
   // @ApiProperty({ type: String })
   // qrData: string;
   @ApiProperty({ type: String })
