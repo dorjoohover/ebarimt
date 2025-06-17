@@ -40,6 +40,9 @@ export class Receipt {
   qrdata: string;
   @Prop({ type: mongoose.Schema.Types.ObjectId, ref: 'User' })
   user: User | any;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export const ReceiptSchema = SchemaFactory.createForClass(Receipt);

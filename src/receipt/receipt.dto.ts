@@ -3,8 +3,6 @@ import { ApiProperty } from '@nestjs/swagger';
 export class DeleteReceiptDto {
   @ApiProperty({ type: Number })
   id: number;
-  @ApiProperty({ type: String })
-  date: string;
 }
 
 export class ReceiptDto {

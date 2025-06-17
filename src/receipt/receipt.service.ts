@@ -247,7 +247,7 @@ export class ReceiptService {
           date: res.date,
           easy: res.easy,
           tin: res.tin,
-          qrdata: res.qrdata
+          qrdata: res.qrdata,
         };
       }
       const body: Receipt = {
@@ -270,7 +270,7 @@ export class ReceiptService {
       };
 
       const barimt = await this.model.create(body);
-      console.log(barimt, token)
+      console.log(barimt, token);
       await this.userModel
         .findOneAndUpdate(
           {
@@ -330,7 +330,7 @@ export class ReceiptService {
         pos: barimt.pos,
         status: barimt.status,
         easy: barimt.easy,
-        qrdata: barimt.qrdata
+        qrdata: barimt.qrdata,
       };
     } catch (error) {
       console.log(error);
@@ -352,11 +352,11 @@ export class ReceiptService {
 
   async deleteReceipt(dto: DeleteReceiptDto) {
     // Баримт хэвлэсэн огноо "yyyy-MM-dd HH:mm:ss" форматтай огноо
-    const date = format(new Date(dto.date), 'yyyy-MM-dd HH:mm:ss');
     try {
       const barimt = await this.model.findOne({
         key: dto.id,
       });
+      const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
       const response = await axios.delete(`${LOCAL}rest/receipt`, {
         data: {
           id: barimt.ddtd,
