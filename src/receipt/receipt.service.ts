@@ -357,7 +357,7 @@ export class ReceiptService {
       const barimt = await this.model.findOne({
         key: dto.id,
         user: user,
-      });
+      }).lean()
       const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
       const response = await axios.delete(`${LOCAL}rest/receipt`, {
         data: {
@@ -366,8 +366,8 @@ export class ReceiptService {
         },
       });
       console.log(response.data);
-      this.model.deleteOne({
-        key: dto.id,
+      this.model.deleteMany({
+        key: dto.id.toString(),
         user: user,
       });
     } catch (error) {
