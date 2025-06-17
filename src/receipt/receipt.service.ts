@@ -354,10 +354,12 @@ export class ReceiptService {
     // Баримт хэвлэсэн огноо "yyyy-MM-dd HH:mm:ss" форматтай огноо
     try {
       const user = new mongoose.Types.ObjectId(u);
-      const barimt = await this.model.findOne({
-        key: dto.id,
-        user: user,
-      }).lean()
+      const barimt = await this.model
+        .findOne({
+          key: dto.id,
+          user: user,
+        })
+        .lean();
       const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
       const response = await axios.delete(`${LOCAL}rest/receipt`, {
         data: {
@@ -366,12 +368,12 @@ export class ReceiptService {
         },
       });
       console.log(response.data);
-      this.model.deleteMany({
+      const b = await this.model.deleteMany({
         key: dto.id.toString(),
         user: user,
       });
+      console.log(b);
     } catch (error) {
-      
       throw new HttpException('Баримт олдсонгүй.', 500);
     }
   }
