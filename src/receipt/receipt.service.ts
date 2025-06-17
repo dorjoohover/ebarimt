@@ -366,7 +366,7 @@ export class ReceiptService {
         },
       });
       console.log(response.data);
-      this.model.deleteMany({
+      this.model.deleteOne({
         key: dto.id,
         user: user,
       });
