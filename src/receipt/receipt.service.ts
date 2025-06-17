@@ -355,6 +355,7 @@ export class ReceiptService {
     try {
       const barimt = await this.model.findOne({
         key: dto.id,
+        // user: 
       });
       const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
       const response = await axios.delete(`${LOCAL}rest/receipt`, {
@@ -364,6 +365,9 @@ export class ReceiptService {
         },
       });
       console.log(response.data);
+      // this.model.deleteMany({
+      //   key: dto.id,
+      // });
     } catch (error) {
       console.log(error.message);
       throw new HttpException('Алдаа гарлаа', 500);
