@@ -350,28 +350,29 @@ export class ReceiptService {
     }
   }
 
-  async deleteReceipt(dto: DeleteReceiptDto, user: string) {
+  async deleteReceipt(dto: DeleteReceiptDto, u: string) {
     // Баримт хэвлэсэн огноо "yyyy-MM-dd HH:mm:ss" форматтай огноо
     try {
+      const user = new mongoose.Types.ObjectId(u);
       const barimt = await this.model.findOne({
         key: dto.id,
-        user: new mongoose.Types.ObjectId(user)
+        user: user,
       });
-      console.log(barimt)
       const date = format(new Date(barimt.createdAt), 'yyyy-MM-dd HH:mm:ss');
-      // const response = await axios.delete(`${LOCAL}rest/receipt`, {
-      //   data: {
-      //     id: barimt.ddtd,
-      //     date,
-      //   },
-      // });
-      // console.log(response.data);
-      // this.model.deleteMany({
-      //   key: dto.id,
-      // });
+      const response = await axios.delete(`${LOCAL}rest/receipt`, {
+        data: {
+          id: barimt.ddtd,
+          date,
+        },
+      });
+      console.log(response.data);
+      this.model.deleteMany({
+        key: dto.id,
+        user: user,
+      });
     } catch (error) {
-      console.log(error.message);
-      throw new HttpException('Алдаа гарлаа', 500);
+      
+      throw new HttpException('Баримт олдсонгүй.', 500);
     }
   }
   async getInformation() {
