@@ -101,7 +101,8 @@ export class PaymentDto {
   status: string;
   @ApiProperty()
   paidAmount: number;
-  //   data: {};
+  // @ApiProperty()
+  // data: any;
 }
 
 export class BarimtDto {
@@ -117,8 +118,8 @@ export class BarimtDto {
   // get from local now
   @ApiProperty()
   posNo?: string;
-  @ApiProperty()
-  easy?: boolean;
+  // @ApiProperty()
+  // easy?: boolean;
   // Худалдан авагчийн ТТД
   regNo?: string;
   // Худалдан авагч иргэний ebarimt-н бүртгэлийн дугаар

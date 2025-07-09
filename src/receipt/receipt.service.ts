@@ -41,7 +41,6 @@ export class ReceiptService {
       districtCode: user.district,
       merchantTin: user.tin,
       posNo: '10009446',
-      easy: dto.easy,
       // ?
       // consumerNo: '10038071',
       type: RECEIPT[dto.type],
@@ -165,7 +164,6 @@ export class ReceiptService {
         districtCode: d.districtCode,
         merchantTin: d.merchantTin,
         totalAmount,
-        easy: d.easy,
         totalVAT,
         customerTin,
         totalCityTax: totalCityTax == 0 ? null : totalCityTax,
@@ -188,6 +186,7 @@ export class ReceiptService {
           },
         },
       );
+      console.log(res.data)
       const data: any = res.data;
       const qrdata = await this.generateQrImage(data.qrData);
       const barimt = await this.save(
@@ -214,6 +213,7 @@ export class ReceiptService {
         qrData: qrdata,
       };
     } catch (error) {
+      console.log(error)
       console.log(error.response.data.message);
       // console.log(error.message);
     }
