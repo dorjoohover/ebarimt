@@ -71,7 +71,14 @@ export class ReceiptService {
           }),
         };
       }),
-      payments: dto.payments,
+      payments: dto.payments.map((d) => {
+        return {
+          ...d,
+          data: {
+            easy: false,
+          },
+        };
+      }),
     };
     const { accessToken } = await this.user.loginEbarimt(user);
     // return token;
@@ -186,7 +193,7 @@ export class ReceiptService {
           },
         },
       );
-      console.log(res.data)
+      console.log(res.data);
       const data: any = res.data;
       const qrdata = await this.generateQrImage(data.qrData);
       const barimt = await this.save(
@@ -213,7 +220,7 @@ export class ReceiptService {
         qrData: qrdata,
       };
     } catch (error) {
-      console.log(error)
+      console.log(error);
       console.log(error.response.data.message);
       // console.log(error.message);
     }
