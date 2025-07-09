@@ -192,7 +192,7 @@ export class ReceiptService {
           },
         },
       );
-      console.log(res.data.payments);
+      console.log(res);
       const data: any = res.data;
       const qrdata = await this.generateQrImage(data.qrData);
       const barimt = await this.save(
