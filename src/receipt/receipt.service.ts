@@ -34,7 +34,7 @@ export class ReceiptService {
   async create(dto: BarimtDto, user: User) {
     const barimt = await this.getBarimt(user._id, dto.billIdSuffix);
     if (barimt) return barimt;
-
+    let easySet = false;
     const d = {
       // branchNo: '001',
       branchNo: dto.branchNo,
@@ -71,14 +71,7 @@ export class ReceiptService {
           }),
         };
       }),
-      payments: dto.payments.map((d) => {
-        return {
-          ...d,
-          data: {
-            easy: false,
-          },
-        };
-      }),
+      payments: dto.payments,
     };
     const { accessToken } = await this.user.loginEbarimt(user);
     // return token;
@@ -194,34 +187,34 @@ export class ReceiptService {
         },
       );
       console.log(res.data);
-      const data: any = res.data;
-      const qrdata = await this.generateQrImage(data.qrData);
-      const barimt = await this.save(
-        {
-          ...data,
-          pos: res.data.posId,
-          tin: res.data.merchantTin,
-          paidAmount: dto.paidAmount,
-          totalAmount: body.totalAmount,
-          qrdata: qrdata,
-          name: body.receipts[0].items[0].name,
-          qty: body.receipts[0].items[0].qty,
-        },
-        user.token,
-        dto.billIdSuffix,
-        user._id,
-      );
-      console.log(barimt);
+      // const data: any = res.data;
+      // const qrdata = await this.generateQrImage(data.qrData);
+      // const barimt = await this.save(
+      //   {
+      //     ...data,
+      //     pos: res.data.posId,
+      //     tin: res.data.merchantTin,
+      //     paidAmount: dto.paidAmount,
+      //     totalAmount: body.totalAmount,
+      //     qrdata: qrdata,
+      //     name: body.receipts[0].items[0].name,
+      //     qty: body.receipts[0].items[0].qty,
+      //   },
+      //   user.token,
+      //   dto.billIdSuffix,
+      //   user._id,
+      // );
+      // console.log(barimt);
 
-      if (res.status != 200) throw new HttpException('', 500);
+      // if (res.status != 200) throw new HttpException('', 500);
 
-      return {
-        ...barimt,
-        qrData: qrdata,
-      };
+      // return {
+      //   ...barimt,
+      //   qrData: qrdata,
+      // };
     } catch (error) {
-      console.log(error);
-      console.log(error.response.data.message);
+      console.log(error.response.data);
+      // console.log(error.response.data.message);
       // console.log(error.message);
     }
   }
