@@ -117,6 +117,8 @@ export class BarimtDto {
   // get from local now
   @ApiProperty()
   posNo?: string;
+  @ApiProperty()
+  easy?: boolean;
   // Худалдан авагчийн ТТД
   regNo?: string;
   // Худалдан авагч иргэний ebarimt-н бүртгэлийн дугаар

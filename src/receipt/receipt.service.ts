@@ -41,6 +41,7 @@ export class ReceiptService {
       districtCode: user.district,
       merchantTin: user.tin,
       posNo: '10009446',
+      easy: dto.easy,
       // ?
       // consumerNo: '10038071',
       type: RECEIPT[dto.type],
@@ -164,6 +165,7 @@ export class ReceiptService {
         districtCode: d.districtCode,
         merchantTin: d.merchantTin,
         totalAmount,
+        easy: d.easy,
         totalVAT,
         customerTin,
         totalCityTax: totalCityTax == 0 ? null : totalCityTax,
@@ -174,7 +176,8 @@ export class ReceiptService {
         receipts,
         payments: d.payments,
       };
-      console.log(body)
+
+      console.log(body);
       const res = await axios.post(
         `${LOCAL}rest/receipt`,
         JSON.stringify(body),
