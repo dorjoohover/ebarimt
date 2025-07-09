@@ -186,7 +186,7 @@ export class ReceiptService {
           },
         },
       );
-      console.log(res.data);
+      console.log(res.data.payments);
       // const data: any = res.data;
       // const qrdata = await this.generateQrImage(data.qrData);
       // const barimt = await this.save(
