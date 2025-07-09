@@ -193,31 +193,31 @@ export class ReceiptService {
         },
       );
       console.log(res.data.payments);
-      // const data: any = res.data;
-      // const qrdata = await this.generateQrImage(data.qrData);
-      // const barimt = await this.save(
-      //   {
-      //     ...data,
-      //     pos: res.data.posId,
-      //     tin: res.data.merchantTin,
-      //     paidAmount: dto.paidAmount,
-      //     totalAmount: body.totalAmount,
-      //     qrdata: qrdata,
-      //     name: body.receipts[0].items[0].name,
-      //     qty: body.receipts[0].items[0].qty,
-      //   },
-      //   user.token,
-      //   dto.billIdSuffix,
-      //   user._id,
-      // );
-      // console.log(barimt);
+      const data: any = res.data;
+      const qrdata = await this.generateQrImage(data.qrData);
+      const barimt = await this.save(
+        {
+          ...data,
+          pos: res.data.posId,
+          tin: res.data.merchantTin,
+          paidAmount: dto.paidAmount,
+          totalAmount: body.totalAmount,
+          qrdata: qrdata,
+          name: body.receipts[0].items[0].name,
+          qty: body.receipts[0].items[0].qty,
+        },
+        user.token,
+        dto.billIdSuffix,
+        user._id,
+      );
+      console.log(barimt);
 
-      // if (res.status != 200) throw new HttpException('', 500);
+      if (res.status != 200) throw new HttpException('', 500);
 
-      // return {
-      //   ...barimt,
-      //   qrData: qrdata,
-      // };
+      return {
+        ...barimt,
+        qrData: qrdata,
+      };
     } catch (error) {
       console.log(error.response.data.payments);
       // console.log(error.response.data.message);
