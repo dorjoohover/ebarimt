@@ -172,7 +172,13 @@ export class ReceiptService {
         // consumerNo: d.consumerNo,
         reportMonth: d.reportMonth ?? null,
         receipts,
-        payments: d.payments,
+        payments: d.payments.map((a) => {
+          return {
+            code: a.code,
+            status: a.status,
+            paidAmount: a.paidAmount,
+          };
+        }),
       };
 
       console.log(body);
