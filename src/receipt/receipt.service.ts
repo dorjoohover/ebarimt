@@ -174,6 +174,7 @@ export class ReceiptService {
         receipts,
         payments: d.payments,
       };
+      console.log(body.payments)
       const res = await axios.post(
         `${LOCAL}rest/receipt`,
         JSON.stringify(body),
