@@ -219,7 +219,7 @@ export class ReceiptService {
         qrData: qrdata,
       };
     } catch (error) {
-      console.log(error.response.data.payments);
+      console.log(error.response.data);
       // console.log(error.response.data.message);
       // console.log(error.message);
     }
